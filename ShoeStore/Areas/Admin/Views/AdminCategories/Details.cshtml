@@ -1,0 +1,77 @@
+﻿@model ShoeStore.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+
+    <h2 class="text-center pt-5">Thông Tin Danh Mục</h2>
+
+    <div class="mt-2 mb-2 btn btn-success">
+        <a class=" text-white text-decoration-none" asp-action="Index">Back to List</a>
+
+    </div>
+    <hr />
+        <div class="row">
+        <table class="table table-bordered">
+            
+            <tbody>
+
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.CategoryName)</th>
+                    <td>@Html.DisplayFor(model => model.CategoryName)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Description)</th>
+                    <td>@Html.DisplayFor(model => model.Description)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.ParentId)</th>
+                    <td>@Html.DisplayFor(model => model.ParentId)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Levels)</th>
+                    <td>@Html.DisplayFor(model => model.Levels)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Published)</th>
+                    <td>@Html.DisplayFor(model => model.Published)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Oder)</th>
+                    <td>@Html.DisplayFor(model => model.Oder)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Thumbnail)</th>
+                    <td>@Html.DisplayFor(model => model.Thumbnail)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Title)</th>
+                    <td>@Html.DisplayFor(model => model.Title)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Alias)</th>
+                    <td>@Html.DisplayFor(model => model.Alias)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.MetaDesc)</th>
+                    <td>@Html.DisplayFor(model => model.MetaDesc)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.MetaKey)</th>
+                    <td>@Html.DisplayFor(model => model.MetaKey)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Cover)</th>
+                    <td>@Html.DisplayFor(model => model.Cover)</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+</div>

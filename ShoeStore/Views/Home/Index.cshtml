@@ -1,0 +1,192 @@
+﻿@model IEnumerable<ShoeStore.Models.Product>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Body -->
+<section id="billboard" class="overflow-hidden">
+    <button class="button-prev">
+        <i class="icon icon-chevron-left"></i>
+    </button>
+    <button class="button-next">
+        <i class="icon icon-chevron-right"></i>
+    </button>
+    <div class="swiper main-swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"
+                 style="
+              background-image: url('images/banner1.jpg');
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center;
+            ">
+                <div class="banner-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="banner-title">Summer Collection</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Sed eu feugiat amet, libero ipsum enim pharetra hac.
+                                </p>
+                                <div class="btn-wrap">
+                                    <a href="shop.html"
+                                       class="btn btn-light btn-medium d-flex align-items-center"
+                                       tabindex="0">
+                                        Shop it now <i class="icon icon-arrow-io"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide"
+                 style="
+              background-image: url('images/banner2.jpg');
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center;
+            ">
+                <div class="banner-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="banner-title">Casual Collection</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Sed eu feugiat amet, libero ipsum enim pharetra hac.
+                                </p>
+                                <div class="btn-wrap">
+                                    <a href="shop.html"
+                                       class="btn btn-light btn-light-arrow btn-medium d-flex align-items-center"
+                                       tabindex="0">
+                                        Shop it now <i class="icon icon-arrow-io"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  New Product -->
+<section id="featured-products" class="product-store padding-large">
+    <div class="container">
+        <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
+            <h2 class="section-title">New Product</h2>
+            <div class="btn-wrap">
+                <a href="shop.html" class="d-flex align-items-center">
+                    View all products <i class="icon icon icon-arrow-io"></i>
+                </a>
+            </div>
+        </div>
+            @await Html.PartialAsync("_NewProductPartialView")
+    </div>
+</section>
+
+<!-- Service -->
+<section id="shipping-information">
+    <hr />
+    <div class="container">
+        <div class="row d-flex flex-wrap align-items-center justify-content-between">
+            <div class="col-md-3 col-sm-6">
+                <div class="icon-box">
+                    <i class="icon icon-truck"></i>
+                    <h4 class="block-title">
+                        <strong>Free shipping</strong> Over $200
+                    </h4>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="icon-box">
+                    <i class="icon icon-return"></i>
+                    <h4 class="block-title">
+                        <strong>Money back</strong> Return within 7 days
+                    </h4>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="icon-box">
+                    <i class="icon icon-tags1"></i>
+                    <h4 class="block-title">
+                        <strong>Buy 4 get 5th</strong> 50% off
+                    </h4>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="icon-box">
+                    <i class="icon icon-help_outline"></i>
+                    <h4 class="block-title">
+                        <strong>Any questions?</strong> experts are ready
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+</section>
+
+<section id="flash-sales" class="product-store padding-large">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Nike</h2>
+        </div>
+        @await Html.PartialAsync("_NikePartialView", Model)
+
+    </div>
+</section>
+
+
+
+<!-- Best Selling -->
+<section id="selling-products"
+         class="product-store bg-light-grey padding-large">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Best selling products</h2>
+        </div>
+        <ul class="tabs list-unstyled">
+            <li data-tab-target="#all" data-category-id="0" class="active tab">All</li>
+            <li data-tab-target="#Nike" data-category-id="10" class="tab">Nike</li>
+            <li data-tab-target="#Adidas" data-category-id="8" class="tab">Adidas</li>
+            <li data-tab-target="#Jordan" data-category-id="7" class="tab">Jordan</li>
+            <li data-tab-target="#YeeZy" data-category-id="11" class="tab">YeeZy</li>
+            <li data-tab-target="#NewBalance" data-category-id="9" class="tab">NewBalance</li>
+
+            <!-- <li data-tab-target="#jackets" class="tab">Jackets</li>
+            <li data-tab-target="#accessories" class="tab">Accessories</li> -->
+        </ul>
+        @await Html.PartialAsync("_AllProductsPartial", Model)
+
+    </div>
+</section>
+
+<hr />
+@section Scripts {
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tabs = document.querySelectorAll('.tabs .tab');
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    var categoryId = tab.dataset.categoryId;
+
+                    fetch('/Home/GetProductsByCategory?categoryId=' + categoryId)
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById('product-container').innerHTML = data;
+                        });
+                    tabs.forEach(function (t) {
+                        t.classList.remove('active');
+                    });
+                    tab.classList.add('active');
+                });
+            });
+        });
+    </script>
+}

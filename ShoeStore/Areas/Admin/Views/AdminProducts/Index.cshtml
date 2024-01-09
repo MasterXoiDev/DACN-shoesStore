@@ -1,0 +1,155 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<ShoeStore.Models.Product>
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Index" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <h2 class="mt-4 text-center fw-bold">
+        <p class="">
+            QUẢN LÝ DANH SÁCH SẢN PHẨM
+        </p>
+    </h2>
+
+    <p class="btn btn-success ">
+        <a class="text-white text-decoration-none" asp-action="Create">Create New</a>
+    </p>
+    <div class="d-flex justify-content-start ">
+        <div class="m-b-10 m-r-15 mb-2 mr-3 ">
+            <select class="custom-select outline-none" id="txtCategoryID" name="txtCategoryID" style="min-width:200px ; height: 45px ; outline:none" asp-items="ViewBag.DanhMuc">
+                <option selected>Chon Danh Muc</option>
+                <option value="all">All</option>
+            </select>
+        </div>
+
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Tên Sản Phẩm
+                </th>
+                <th>
+                    Danh Mục
+                </th>
+                <th>
+                    Giá
+                </th>
+                <th>
+                    Trạng Thái
+                </th>
+
+                <th>
+                    Best Seller
+                </th>
+                <th>
+                    Tồn Kho
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.ProductId
+                    </td>
+                    @*  <td>
+                <div class="" style="width: 50px; height: 50px;">
+                <img src="@item.Thumb" alt="Product Image" class="w-full h-full" style="width: 50px; height: 40px;" asp-append-version="true">
+
+                </div>
+                </td> *@
+                    <td>
+                        @item.ProductName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+                    <td>
+                        @(item.Price != null ? item.Price.Value.ToString("#,##0") + " VND" : "Price is not available")
+
+                    </td>
+
+                    <td>
+                        @if (item.UnitsStock.HasValue && item.UnitsStock.Value > 0)
+                        {
+                            <div> In Stock</div>
+                        }
+                        else
+                        {
+                            <div>
+                                Out Of Stock
+                            </div>
+                        }
+                    </td>
+                    <td>
+                        @item.BestSellers
+
+                    </td>
+                    <td>
+                        @item.UnitsStock
+
+                    </td>
+                    <td>
+                        <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                        <a class="btn btn-light" asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div aria-label="Page navigation">
+        <ul class="pagination">
+            <pager class="paper-container" list="@Model" asp-area="Admin" asp-controller="AdminProducts" asp-action="Index" asp-route-CatID="@ViewBag.CurrentCateID"></pager>
+        </ul>
+    </div>
+
+</div>
+<style>
+    .product-name {
+        width: 200px; /* Độ rộng của phần hiển thị */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            jQuery("#txtCategoryID").change(function () {
+                var catID = $(this).val();
+                $.ajax({
+                    url: '/Admin/AdminProducts/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        CatID: catID
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success" && results.redirectUrl) {
+                            window.location.href = results.redirectUrl;
+                        } else {
+                            console.error('Invalid redirect URL');
+                        }
+                    },
+                    error: function (xhr) {
+                        console.error('Error occurred during AJAX request');
+                    }
+                });
+            });
+        });
+    </script>
+}
+

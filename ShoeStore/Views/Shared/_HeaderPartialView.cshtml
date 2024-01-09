@@ -1,0 +1,200 @@
+﻿<div id="header-wrap">
+    <nav class="secondary-nav border-bottom">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-md-4 header-contact">
+                    <p>Let's talk! <strong>+84 937051131</strong></p>
+                </div>
+                <div class="col-md-4 shipping-purchase text-center">
+                    <p>Welcome To Metal Shoes Store!!</p>
+                </div>
+                <div class="col-md-4 col-sm-12 user-items ">
+                    <ul class="d-flex justify-content-end list-unstyled align-item">
+                        <li class="header-icon">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a href="/dashboard.html">
+                                    <i class="icon icon-user"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="/login.html">
+                                    <i class="icon icon-user"></i>
+                                </a>
+                            }
+                           
+                        </li >
+                        <li class ="numberCart">
+                                @await Component.InvokeAsync("NumberCart")
+
+                        </li>
+                        <li class="user-items search-item">
+                            <form action="/shop.html" method="get" class="search-form m-0">
+                                <input type="text" name="search" placeholder="Search products...">
+@*                                 <button type="submit"><i class="icon icon-search text-dark "></i></button>
+ *@
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <nav class="primary-nav padding-small">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-2 col-md-2">
+                    <div class="main-logo">
+                        <a href="index.html">
+                            <img width="100px"
+                                 height=""
+                                 src="~/feassets/images/logo store.png"
+                                 alt="logo" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                    <div class="navbar">
+                        <div id="main-nav"
+                             class="stellarnav d-flex justify-content-end right">
+                            <ul class="menu-list">
+                                <li class="menu-item has-sub">
+                                    <a asp-controller="Home" asp-action="index"
+                                       class="item-anchor d-flex align-item-center"
+                                       data-effect="Pages">
+                                        HOME
+                                    </a>
+                                </li>
+
+                                <li class="menu-item has-sub">
+                                    <a asp-controller="Home" asp-action="about"
+                                       class="item-anchor d-flex align-item-center"
+                                       data-effect="Blog">
+                                        ABOUT
+                                    </a>
+
+                                </li>
+
+                                <li class="menu-item has-sub">
+                                    <a href="/shop"
+                                       class="item-anchor d-flex align-item-center"
+                                       data-effect="Home">
+                                        NIKE<i class="icon icon-chevron-down"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                        <li>
+                                            <a href="/shop.html" class="item-anchor">Nam</a>
+                                        </li>
+                                        <li>
+                                            <a href="/shop.html" class="item-anchor">Nữ</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="menu-item has-sub">
+                                    <a href="/shop.html"
+                                       class="item-anchor d-flex align-item-center"
+                                       data-effect="Shop">
+                                        ADIDAS<i class="icon icon-chevron-down"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                        <li>
+                                            <a href="/shop.html" class="item-anchor">NAM</a>
+                                        </li>
+                                        <li>
+                                            <a href="/shop.html" class="item-anchor">NỮ</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item has-sub">
+                                    <a href="shop.html"
+                                       class="item-anchor d-flex align-item-center"
+                                       data-effect="Shop">
+                                        OTHER BRAND<i class="icon icon-chevron-down"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                        <li>
+                                            <a href="shop.html" class="item-anchor">SNEAKER AUTHENTIC</a>
+                                        </li>
+                                        <li>
+                                            <a href="shop.html" class="item-anchor">GIÀY THỂ THAO CHẠY BỘ - TẬP GYM</a>
+                                        </li>
+                                        <li>
+                                            <a href="shop.html" class="item-anchor">GIÀY TENIS</a>
+                                        </li>
+                                        <li>
+                                            <a href="shop.html" class="item-anchor">BOX HỢP ĐỰNG GIÀY SNEAKER</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- <li>
+                                  <a
+                                    href="contact.html"
+                                    class="item-anchor"
+                                    data-effect="Contact"
+                                    >Contact</a
+                                  >
+                                </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+@section Scripts {
+    <script>
+        $(function () {
+            function loadHeaderCart() {
+                $("#numberCart").load("/AjaxContent/NumberCart");
+            }
+            $(".update-cart").click(function () {
+                var productid = $(this).prev("input.pdate-cart").data("productid");
+                var amount = parseInt($(this).prev("input.pdate-cart").val());
+                console.log("id" + productid);
+                console.log("id" + amount);
+                $.ajax({
+                    url: "/api/cart/update",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        productID: productid,
+                        amount: amount
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            loadHeaderCart();
+                            window.location = 'cart.html';
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Cập nhật Cart Error!");
+                    }
+                });
+            });
+            $("#Removecart").click(function () {
+                var productid = $(this).attr("data-productid");
+                $.ajax({
+                    url: "/api/cart/remove",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { productID: productid },
+                    success: function (result) {
+                        if (result.success) {
+                            loadHeaderCart();//Reload lại giỏ hàng
+                            window.location = 'cart.html';
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Cập nhật Cart Error!");
+                    }
+                });
+
+            });
+
+        });
+
+    </script>
+}

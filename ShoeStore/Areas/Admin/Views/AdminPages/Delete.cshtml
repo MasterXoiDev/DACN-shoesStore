@@ -1,0 +1,69 @@
+﻿@model ShoeStore.Models.Page
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+     <h2 class="text-center pt-5">Xóa Danh Mục</h2>
+
+    <div class="mt-2 mb-2 btn btn-success">
+        <a class=" text-white text-decoration-none" asp-action="Index">Back to List</a>
+
+    </div>
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.PageName)</th>
+                    <td>@Html.DisplayFor(model => model.PageName)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Contents)</th>
+                    <td>@Html.DisplayFor(model => model.Contents)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Thumbnail)</th>
+                    <td>@Html.DisplayFor(model => model.Thumbnail)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Published)</th>
+                    <td>@Html.DisplayFor(model => model.Published)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Title)</th>
+                    <td>@Html.DisplayFor(model => model.Title)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.MetaDesc)</th>
+                    <td>@Html.DisplayFor(model => model.MetaDesc)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.MetaKey)</th>
+                    <td>@Html.DisplayFor(model => model.MetaKey)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Alias)</th>
+                    <td>@Html.DisplayFor(model => model.Alias)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.CreateDate)</th>
+                    <td>@Html.DisplayFor(model => model.CreateDate)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Ordering)</th>
+                    <td>@Html.DisplayFor(model => model.Ordering)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="PageId" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+
+    </form>
+</div>

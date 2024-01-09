@@ -1,0 +1,71 @@
+﻿@model ShoeStore.Models.Customer
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid">
+    <h2 class="text-center pt-3 mt-5">Customer Detail</h2>
+
+    <div class="mt-2 mb-2 btn btn-success">
+        <a class=" text-white text-decoration-none" asp-action="Index">Back to List</a>
+
+    </div>
+    <hr />
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                <td>@Html.DisplayFor(model => model.FullName)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Birthday)</th>
+                <td>@Html.DisplayFor(model => model.Birthday)</td>
+            </tr>
+  
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Address)</th>
+                <td>@Html.DisplayFor(model => model.Address)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Avatar)</th>
+                <td>@Html.DisplayFor(model => model.Avatar)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Phone)</th>
+                <td>@Html.DisplayFor(model => model.Phone)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <td>@Html.DisplayFor(model => model.Email)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.CreateDate)</th>
+                <td>@Html.DisplayFor(model => model.CreateDate)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.LocationId)</th>
+                <td>@Html.DisplayFor(model => model.LocationId)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Salt)</th>
+                <td>@Html.DisplayFor(model => model.Salt)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.LastLogin)</th>
+                <td>@Html.DisplayFor(model => model.LastLogin)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Active)</th>
+                <td>@Html.DisplayFor(model => model.Active)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Active)</th>
+                <td>@Html.DisplayFor(model => model.Active)</td>
+            </tr>
+           
+        </tbody>
+    </table>
+
+</div>
+
